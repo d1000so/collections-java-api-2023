@@ -9,8 +9,6 @@ public class Numero {
 
     @Override
     public String toString() {
-        return "Numero{" +
-                "numero=" + numero +
-                '}';
+        return "" + numero;
     }
 }
