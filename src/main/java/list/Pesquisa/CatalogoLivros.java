@@ -25,16 +25,40 @@ public class CatalogoLivros {
         return livrosPorAutor;
     }
 
-    public List<Livro> pesquisaPorTitulo(String titulo) {
-        List<Livro> livrosPorTitulo = new ArrayList<>();
+    public List<Livro> pequisaPorIntervaloAno(int anoInitial, int anoFinal) {
+        List<Livro> livrosPorIntervaloAnos = new ArrayList<>();
         if (!livroList.isEmpty()) {
             for (Livro l : livroList) {
-                if(l.getTitulo().equalsIgnoreCase()){
-                    livrosPorTitulo.add(l);
-
+                if (l.getAnoPublicacao() >= anoInitial && l.getAnoPublicacao() <= anoFinal) {
+                    livrosPorIntervaloAnos.add(l);
+                }
+            }
+        }
+        return livrosPorIntervaloAnos;
+    }
+    public Livro pesquisaPorTitulo(String titulo) {
+        Livro livrosPorTitulo = null;
+        if (!livroList.isEmpty()) {
+            for (Livro l : livroList) {
+                if(l.getTitulo().equalsIgnoreCase(titulo)){
+                    livrosPorTitulo = l;
+                    break;
                 }
             }
         }
     return livrosPorTitulo;
+    }
+
+    public static void main(String[] args) {
+        CatalogoLivros catalogoLivros = new CatalogoLivros();
+        catalogoLivros.adicionarLivro("Corte de Gelo e Estrlas", "Sarah J Maas", 2021);
+        catalogoLivros.adicionarLivro("Razão e Sensibilidade", "Jane Austen", 1811);
+        catalogoLivros.adicionarLivro("Persuasão", "Jane Austen", 1818);
+        catalogoLivros.adicionarLivro("Fazendo meu filme", "Paula Pimenta", 2021);
+        catalogoLivros.adicionarLivro("Os sete hábitos das pessoas", "Steve Covey", 2001);
+
+        System.out.println(catalogoLivros.pequisaPorIntervaloAno(2000, 2003));
+        System.out.println(catalogoLivros.pesquisarPorAutor("Jane Austen"));
+        System.out.println(catalogoLivros.pesquisaPorTitulo("persuasão"));
     }
 }
